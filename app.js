@@ -3,15 +3,17 @@ angular.module("TwitterSearch", ["ngResource", "ngCookies"]);
 function TwitterSearchController($scope, $resource, $cookieStore) {
 
     $scope.initSearchService = function () {
-        var queryParams = {};
-        queryParams.callback = "JSON_CALLBACK";
+//        var queryParams = {};
+//        queryParams.callback = "JSON_CALLBACK";
+//
+//        var actions = {};
+//        actions.get = {method: "JSONP"};
+//
+//        return $resource("https://api.twitter.com/1.1/search/tweets.json",
+//            queryParams,
+//            actions);
 
-        var actions = {};
-        actions.get = {method: "JSONP"};
-
-        return $resource("https://api.twitter.com/1.1/search/tweets.json",
-            queryParams,
-            actions);
+        return $resource("data/tweets.json", {}, {});
     };
 
     $scope.search = function (searchText) {
