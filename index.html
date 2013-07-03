@@ -47,7 +47,7 @@
 
 	<div class="resultsPanel"
 	     ng-show="hasActiveSearch(activeSearchTerm)">
-		<h3 style="text-align: center">'{{searchResult.results.length}}' tweets about '{{activeSearchTerm}}'</h3>
+		<h3 style="text-align: center">'{{searchResult.statuses.length}}' tweets about '{{activeSearchTerm}}'</h3>
 		<br/>
 		<table class="table table-bordered table-striped">
 			<tr>
@@ -55,8 +55,8 @@
 				<th>Message</th>
 				<th>Date</th>
 			</tr>
-			<tr ng-repeat="tweet in searchResult.results">
-				<td>{{tweet.from_user_name}}</td>
+			<tr ng-repeat="tweet in searchResult.statuses">
+				<td>{{tweet.user.name}}</td>
 				<td>{{tweet.text}}</td>
 				<td>{{tweet.created_at}}</td>
 			</tr>
