@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html ng-app="TwitterSearch" style="height: 100%">
+
+<head>
+	<title>Twitter Search</title>
+
+	<script type="text/javascript" src="lib/angular-1.0.0rc7.js"></script>
+	<script type="text/javascript" src="lib/angular-cookies-1.0.0rc7.js"></script>
+	<script type="text/javascript" src="lib/angular-resource-1.0.0rc7.js"></script>
+	<script type="text/javascript" src="app.js"></script>
+
+	<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css"/>
+	<link rel="stylesheet" href="app.css">
+</head>
+
+<body style="height: 100%">
+<div ng-controller="TwitterSearchController" class="mainView">
+
+	<div class="sidePanel">
+		<h3>Twitter Search</h3>
+
+		<form class="form-horizontal">
+			<input type="text" ng-model="searchText"/>
+			<button class="btn" ng-click="search()">
+				<i class="icon-search"></i>
+			</button>
+		</form>
+		<hr>
+		<ul class="nav nav-pills nav-stacked">
+			<li ng-repeat="searchTerm in searchTerms"
+			    class="{{getSearchTermClass(searchTerm)}}"
+			    ng-mouseover="onSearchTermMouseOver($index)"
+			    ng-mouseout="onSearchTermMouseOut()">
+				<a href="#"
+				   ng-click="search(searchTerm)">
+					<div>{{searchTerm}}
+						<div style="float: right">
+							<i class="icon-remove"
+							   ng-show="$index == rolloverSearchTermIndex"
+							   ng-click="removeSearchTerm(searchTerm)"></i>
+						</div>
+					</div>
+				</a>
+			</li>
+		</ul>
+	</div>
+
+	<div class="resultsPanel"
+	     ng-show="hasActiveSearch(activeSearchTerm)">
+		<h3 style="text-align: center">'{{searchResult.results.length}}' tweets about '{{activeSearchTerm}}'</h3>
+		<br/>
+		<table class="table table-bordered table-striped">
+			<tr>
+				<th>Author</th>
+				<th>Message</th>
+				<th>Date</th>
+			</tr>
+			<tr ng-repeat="tweet in searchResult.results">
+				<td>{{tweet.from_user_name}}</td>
+				<td>{{tweet.text}}</td>
+				<td>{{tweet.created_at}}</td>
+			</tr>
+		</table>
+	</div>
+
+</div>
+</body>
+</html>
